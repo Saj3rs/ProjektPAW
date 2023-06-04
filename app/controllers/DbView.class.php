@@ -3,8 +3,12 @@
 namespace app\controllers;
 
 use core\App;
-use core\Message;
 use core\Utils;
+use core\RoleUtils;
+use core\ParamUtils;
+use app\forms\LoginForm;
+use app\forms\BookSearchForm;
+
 
 
 
@@ -13,11 +17,14 @@ class DbView {
   
     private $where;
     private $form;
+    private $lform;
     private $records;
 
 	public function __construct(){
 		//stworzenie potrzebnych obiektów
 		$this->form = new BookSearchForm();
+		$this->lform = new LoginForm();
+                
 	}
     
     public function getWhere(){
@@ -50,20 +57,23 @@ class DbView {
                 "books.id_book",
                 "books.tytul",
                 "books.gatunek",
-                "authors.imie",
-                "authors.nazwisko",
-                "users.id_user"
+                "authors.imie(aimie)",
+                "authors.nazwisko(anazwisko)",
+                "users.imie(uimie)",
+                "users.nazwisko(unazwisko)"
             ], $this->where);
                     
                    
 		} catch (PDOException $e){
                     App::getMessages()->addMessage(new \core\Message("Wystąpił błąd podczas pobierania rekordów", \core\Message::ERROR));
-			//if (getConf()->debug) getMessages()->addError($e->getMessage());			
-		}
+                    if (getConf()->debug) {
+                    App::getMessages()->addMessage(new \core\Message($e, \core\Message::ERROR));
+                }
+        }
                
         
         App::getSmarty()->assign("books", $this->records);        
-        App::getSmarty()->display("main.tpl");
+        App::getSmarty()->display("test.tpl");
         
     }
     
