@@ -1,7 +1,6 @@
 <?php namespace app\forms;
 class LoginForm {
-	public $fname;
-	public $lname;
+	public $user_id;
 	public $pass;
 	
 } 

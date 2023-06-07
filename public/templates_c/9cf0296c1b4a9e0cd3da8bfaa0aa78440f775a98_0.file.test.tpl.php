@@ -1,69 +1,50 @@
 <?php
-/* Smarty version 4.3.0, created on 2023-06-04 19:30:07
+/* Smarty version 4.3.0, created on 2023-06-07 16:31:20
   from 'B:\www\Projekt\app\views\test.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.0',
-  'unifunc' => 'content_647cca1f775533_98344559',
+  'unifunc' => 'content_648094b8cd6af6_14558938',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '9cf0296c1b4a9e0cd3da8bfaa0aa78440f775a98' => 
     array (
       0 => 'B:\\www\\Projekt\\app\\views\\test.tpl',
-      1 => 1685899728,
+      1 => 1686148280,
       2 => 'file',
     ),
   ),
   'includes' => 
   array (
+    'file:./templates/data_table.tpl' => 1,
   ),
 ),false)) {
-function content_647cca1f775533_98344559 (Smarty_Internal_Template $_smarty_tpl) {
+function content_648094b8cd6af6_14558938 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <!doctype html>
 <html lang="pl">
 
 
-<div style="background-image:url('/Projekt/css/bgd.jpg')">
+<div style="background-image:url('/Projekt/public/css/bgd.jpg')">
 <div id="layout">
 
 
-<table id="tab_calc" class="pure-table pure-table-bordered">
-<thead>
-	<tr>
-		<th>id</th>
-		<th>title</th>
-		<th>genre</th>
-		<th>Authors Firstname</th>
-		<th>Authors Lastname</th>
-		<th>Borrowers Firstname</th>
-		<th>Borrowers Lastname</th>
-                
-                
-	</tr>
-</thead>
-<tbody>
-<?php
-$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['books']->value, 'p');
-$_smarty_tpl->tpl_vars['p']->do_else = true;
-if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['p']->value) {
-$_smarty_tpl->tpl_vars['p']->do_else = false;
+    <form class="pure-form pure-form-stacked" action="<?php echo $_smarty_tpl->tpl_vars['conf']->value->action_root;?>
+view" method="post">
+	<label for="filter1">Authors Last Name: </label>
+	<input id="filter1" type="text" name="lastname" value="<?php echo $_smarty_tpl->tpl_vars['form']->value->lastname;?>
+" /><br />
+	<label for="filter2">Title: </label>
+	<input id="filter2" type="text" name="title" value="<?php echo $_smarty_tpl->tpl_vars['form']->value->title;?>
+" /><br />
+	<input class="pure-button" type="submit" value="Filter" />
+</form>	
+
+
+<?php $_smarty_tpl->_subTemplateRender("file:./templates/data_table.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
-<tr><td><?php echo $_smarty_tpl->tpl_vars['p']->value["id_book"];?>
-</td><td><?php echo $_smarty_tpl->tpl_vars['p']->value["tytul"];?>
-</td><td><?php echo $_smarty_tpl->tpl_vars['p']->value["gatunek"];?>
-</td><td><?php echo $_smarty_tpl->tpl_vars['p']->value["aimie"];?>
-</td><td><?php echo $_smarty_tpl->tpl_vars['p']->value["anazwisko"];?>
-</td><td><?php echo $_smarty_tpl->tpl_vars['p']->value["uimie"];?>
-</td><td><?php echo $_smarty_tpl->tpl_vars['p']->value["unazwisko"];?>
-</td></tr>
-<?php
-}
-$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
-</tbody>
-</table>
 
 </div>
 </div>

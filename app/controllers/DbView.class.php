@@ -17,13 +17,11 @@ class DbView {
   
     private $where;
     private $form;
-    private $lform;
     private $records;
 
 	public function __construct(){
 		//stworzenie potrzebnych obiektów
 		$this->form = new BookSearchForm();
-		$this->lform = new LoginForm();
                 
 	}
     
@@ -32,8 +30,8 @@ class DbView {
 		if ( isset($this->form->title) && strlen($this->form->title) > 0) {
 			$search_params['books.tytul[~]'] = $this->form->title.'%'; // dodanie symbolu % zastępuje dowolny ciąg znaków na końcu
 		}
-		if ( isset($this->form->author) && strlen($this->form->author) > 0) {
-			$search_params['authors.nazwisko[~]'] = $this->form->author.'%'; // dodanie symbolu % zastępuje dowolny ciąg znaków na końcu
+		if ( isset($this->form->lastname) && strlen($this->form->lastname) > 0) {
+			$search_params['authors.nazwisko[~]'] = $this->form->lastname.'%'; // dodanie symbolu % zastępuje dowolny ciąg znaków na końcu
 		}
                 
 		$num_params = sizeof($search_params);
