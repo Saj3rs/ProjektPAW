@@ -7,58 +7,48 @@ use core\Utils;
 use core\RoleUtils;
 use core\ParamUtils;
 use app\forms\LoginForm;
-use app\forms\BookSearchForm;
+use app\forms\BookBorrowForm;
 
 
 
 
-class DbView {
+class DbEdit {
 
   
     private $where;
     private $form;
+    private $user_id;
     private $records;
 
 	public function __construct(){
 		//stworzenie potrzebnych obiektów
-		$this->form = new BookSearchForm();
+		$this->form = new BookBorrowForm();
                 
 	}
     
     public function getWhere(){
                  $search_params = []; //przygotowanie pustej struktury (aby była dostępna nawet gdy nie będzie zawierała wierszy)
-		if ( isset($this->form->title) && strlen($this->form->title) > 0) {
-			$search_params['books.tytul[~]'] = $this->form->title.'%'; // dodanie symbolu % zastępuje dowolny ciąg znaków na końcu
-		}
-		if ( isset($this->form->lastname) && strlen($this->form->lastname) > 0) {
-			$search_params['authors.nazwisko[~]'] = $this->form->lastname.'%'; // dodanie symbolu % zastępuje dowolny ciąg znaków na końcu
-		}
-                
+		if (( isset($this->form->book_id) && strlen($this->form->book_id) > 0)){
+			$search_params['books.id_book'] = $this->form->book_id; // dodanie symbolu % zastępuje dowolny ciąg znaków na końcu
+			$search_params['authors.id_user'] = NULL; // dodanie symbolu % zastępuje dowolny ciąg znaków na końcu
+		
+                        
+                }
 		$num_params = sizeof($search_params);
 		if ($num_params > 1) {
 			$this->where = [ "AND" => &$search_params ];
 		} else {
 			$this->where = &$search_params;
 		}
-		$where ["ORDER"] = "books.tytul";
     }
 
-    public function action_view() {
+    public function action_borrow() {
 	$this->getWhere();
         
         try{
-             $this->records = App::getDB()->select('books', [
-                "[>]authors"=>["id_author"=>"id_author"],
-                "[>]users"=>["id_user"=>"id_user"]
-            ],
-            [
-                "books.id_book",
-                "books.tytul",
-                "books.gatunek",
-                "authors.imie(aimie)",
-                "authors.nazwisko(anazwisko)",
-                "users.imie(uimie)",
-                "users.nazwisko(unazwisko)"
+            App::getDB()->update('books', [
+                "id_user"=>1
+                
             ], $this->where);
                     
                    
