@@ -18,7 +18,6 @@ class DbEdit {
     private $where;
     private $form;
     private $user_id;
-    private $records;
 
 	public function __construct(){
 		//stworzenie potrzebnych obiektów

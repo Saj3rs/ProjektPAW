@@ -26,6 +26,14 @@ class DbView {
 	}
     
     public function getWhere(){
+                $this->form->lastname = ParamUtils::getFromRequest('lastname');
+                $this->form->title = ParamUtils::getFromRequest('title');
+                App::getSmarty()->assign("flastname", $this->form->lastname);
+                App::getSmarty()->assign("ftitle", $this->form->title);
+                        
+
+        
+        
                  $search_params = []; //przygotowanie pustej struktury (aby była dostępna nawet gdy nie będzie zawierała wierszy)
 		if ( isset($this->form->title) && strlen($this->form->title) > 0) {
 			$search_params['books.tytul[~]'] = $this->form->title.'%'; // dodanie symbolu % zastępuje dowolny ciąg znaków na końcu
