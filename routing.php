@@ -4,8 +4,9 @@ use core\App;
 use core\Utils;
 
 App::getRouter()->setDefaultRoute('view'); #default action
-//App::getRouter()->setLoginRoute('login'); #action to forward if no permissions
+App::getRouter()->setLoginRoute('login'); #action to forward if no permissions
 
+Utils::addRoute('dologin', 'login');
 Utils::addRoute('view', 'DbView');
 Utils::addRoute('borrow', 'DbEdit');
 

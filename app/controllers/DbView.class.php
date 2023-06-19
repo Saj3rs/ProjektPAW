@@ -36,10 +36,10 @@ class DbView {
         
                  $search_params = []; //przygotowanie pustej struktury (aby była dostępna nawet gdy nie będzie zawierała wierszy)
 		if ( isset($this->form->title) && strlen($this->form->title) > 0) {
-			$search_params['books.tytul[~]'] = $this->form->title.'%'; // dodanie symbolu % zastępuje dowolny ciąg znaków na końcu
+			$search_params['books.tytul[~]'] = '%'.$this->form->title.'%'; // dodanie symbolu % zastępuje dowolny ciąg znaków na końcu
 		}
 		if ( isset($this->form->lastname) && strlen($this->form->lastname) > 0) {
-			$search_params['authors.nazwisko[~]'] = $this->form->lastname.'%'; // dodanie symbolu % zastępuje dowolny ciąg znaków na końcu
+			$search_params['authors.nazwisko[~]'] = '%'.$this->form->lastname.'%'; // dodanie symbolu % zastępuje dowolny ciąg znaków na końcu
 		}
                 
 		$num_params = sizeof($search_params);
