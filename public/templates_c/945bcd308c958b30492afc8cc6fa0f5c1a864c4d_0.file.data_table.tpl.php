@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.0, created on 2023-06-08 17:52:02
+/* Smarty version 4.3.0, created on 2023-06-21 14:28:40
   from 'B:\www\Projekt\app\views\templates\data_table.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.0',
-  'unifunc' => 'content_6481f922ede2c1_51264610',
+  'unifunc' => 'content_6492ecf819c3f0_46721008',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '945bcd308c958b30492afc8cc6fa0f5c1a864c4d' => 
     array (
       0 => 'B:\\www\\Projekt\\app\\views\\templates\\data_table.tpl',
-      1 => 1686137040,
+      1 => 1687350518,
       2 => 'file',
     ),
   ),
@@ -20,19 +20,20 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_6481f922ede2c1_51264610 (Smarty_Internal_Template $_smarty_tpl) {
-?>
-<table id="tab_calc" class="pure-table pure-table-bordered">
+function content_6492ecf819c3f0_46721008 (Smarty_Internal_Template $_smarty_tpl) {
+?><figure>
+<table id="tab_calc" role="grid">
 <thead>
-	<tr>
-		<th>id</th>
-		<th>title</th>
-		<th>genre</th>
-		<th>Authors Firstname</th>
-		<th>Authors Lastname</th>
-		<th>Borrowers Firstname</th>
-		<th>Borrowers Lastname</th>
-                <th>Borrow</th>
+	<tr >
+                <th scope="col">#</th>
+		<th scope="col">id</th>
+		<th scope="col">title</th>
+		<th scope="col">genre</th>
+		<th scope="col">Authors Firstname</th>
+		<th scope="col">Authors Lastname</th>
+		<th scope="col">Borrowers Firstname</th>
+		<th scope="col">Borrowers Lastname</th>
+                <th scope="col">Borrow</th>
                 
                 
 	</tr>
@@ -44,7 +45,7 @@ $_smarty_tpl->tpl_vars['p']->do_else = true;
 if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['p']->value) {
 $_smarty_tpl->tpl_vars['p']->do_else = false;
 ?>
-<tr><td><?php echo $_smarty_tpl->tpl_vars['p']->value["id_book"];?>
+<tr><th scope="row">1</th><td><?php echo $_smarty_tpl->tpl_vars['p']->value["id_book"];?>
 </td><td><?php echo $_smarty_tpl->tpl_vars['p']->value["tytul"];?>
 </td><td><?php echo $_smarty_tpl->tpl_vars['p']->value["gatunek"];?>
 </td><td><?php echo $_smarty_tpl->tpl_vars['p']->value["aimie"];?>
@@ -54,10 +55,11 @@ $_smarty_tpl->tpl_vars['p']->do_else = false;
 </td><td><form class="pure-form pure-form-stacked" action="<?php echo $_smarty_tpl->tpl_vars['conf']->value->action_root;?>
 borrow" method="post"><input id="user_id" type="hidden" name="user_id" value="<?php echo $_smarty_tpl->tpl_vars['loginform']->value->user_id;?>
 " /><br /><input id="book_id" type="hidden" name="book_id" value="<?php echo $_smarty_tpl->tpl_vars['p']->value["id_book"];?>
-" /><br /><input class="pure-button" type="submit" value="Borrow" /></form></td></tr>
+" /><br /><input role="button" type="submit" value="Borrow" /></form></td></tr>
 <?php
 }
 $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 </tbody>
-</table><?php }
+</table>
+</figure><?php }
 }

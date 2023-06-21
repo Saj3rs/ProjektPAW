@@ -1,10 +1,13 @@
 
-<div id="filter">
-    <form class="pure-form pure-form-stacked" action="{$conf->action_root}view" method="post">
-	<label for="filter1">Authors Last Name: </label>
-	<input id="filter1" type="text" name="lastname" value="{$flastname}" /><br />
-	<label for="filter2">Title: </label>
-	<input id="filter2" type="text" name="title" value="{$ftitle}" /><br />
-	<input class="pure-button" type="submit" value="Filter" />
+<form class="pure-form pure-form-stacked" action="{$conf->action_root}view" method="post">
+        <div class="grid" id="filter">
+        <label for="filter1">Authors Last Name: 
+	<input id="filter1" type="search" name="lastname" placeholder="Last Name" value="{$flastname}" />
+        </label>
+        <label for="filter2">Title:
+	<input id="filter2" type="search" name="title" placeholder="Title" value="{$ftitle}" />
+	</label>
+         </div>
+        <input role="button" type="submit" value="Filter" />
+       
 </form>	
-</div>
