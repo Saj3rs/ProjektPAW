@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 4.3.0, created on 2023-06-21 15:18:58
+/* Smarty version 4.3.0, created on 2023-06-21 18:08:46
   from 'B:\www\Projekt\app\views\templates\filter.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.0',
-  'unifunc' => 'content_6492f8c255c624_71020691',
+  'unifunc' => 'content_6493208e9f6218_11124406',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '4b1cf5597deb3148bc3123fc6ad0008cf38ce69b' => 
     array (
       0 => 'B:\\www\\Projekt\\app\\views\\templates\\filter.tpl',
-      1 => 1687353537,
+      1 => 1687363717,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_6492f8c255c624_71020691 (Smarty_Internal_Template $_smarty_tpl) {
+function content_6493208e9f6218_11124406 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <form class="pure-form pure-form-stacked" action="<?php echo $_smarty_tpl->tpl_vars['conf']->value->action_root;?>
 view" method="post">
@@ -33,9 +33,10 @@ view" method="post">
 	<input id="filter2" type="search" name="title" placeholder="Title" value="<?php echo $_smarty_tpl->tpl_vars['ftitle']->value;?>
 " />
 	</label>
-         </div>
-        <input role="button" type="submit" value="Filter" />
-       
+        </div>
+        <footer>
+            <input role="button" type="submit" value="Filter" />
+        </footer>
 </form>	
 <?php }
 }

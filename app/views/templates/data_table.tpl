@@ -2,7 +2,7 @@
 <table id="tab_calc" role="grid">
 <thead>
 	<tr >
-                <th scope="col">#</th>
+                
 		<th scope="col">id</th>
 		<th scope="col">title</th>
 		<th scope="col">genre</th>
@@ -19,7 +19,7 @@
 {foreach $books as $p}
 {strip}
 	<tr>
-                <th scope="row">1</th>
+                
 		<td>{$p["id_book"]}</td>
 		<td>{$p["tytul"]}</td>
 		<td>{$p["gatunek"]}</td>

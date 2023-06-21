@@ -7,7 +7,8 @@
         <label for="filter2">Title:
 	<input id="filter2" type="search" name="title" placeholder="Title" value="{$ftitle}" />
 	</label>
-         </div>
-        <input role="button" type="submit" value="Filter" />
-       
+        </div>
+        <footer>
+            <input role="button" type="submit" value="Filter" />
+        </footer>
 </form>	
