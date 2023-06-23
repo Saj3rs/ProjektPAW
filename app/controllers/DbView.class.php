@@ -30,6 +30,8 @@ class DbView {
                 $this->form->title = ParamUtils::getFromRequest('title');
                 App::getSmarty()->assign("flastname", $this->form->lastname);
                 App::getSmarty()->assign("ftitle", $this->form->title);
+                App::getSmarty()->assign("login","");        
+                
                         
 
         
@@ -78,9 +80,18 @@ class DbView {
         }
                
         
-        App::getSmarty()->assign("books", $this->records);        
-        App::getSmarty()->display("test.tpl");
+        App::getSmarty()->assign("books", $this->records);      
         
+        if(RoleUtils::inRole("Admin")){
+            App::getSmarty()->display("admin_view.tpl");
+        }
+        else 
+            if(RoleUtils::inRole("User")){
+                App::getSmarty()->display("logged_view.tpl");
+            }
+            else{
+                App::getSmarty()->display("main_view.tpl");
+            }
     }
     
 }

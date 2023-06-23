@@ -4,6 +4,9 @@ namespace app\controllers;
 
 use core\App;
 use core\Utils;
+use core\Message;
+use core\Messages;
+use core\SessionUtils;
 use core\RoleUtils;
 use core\ParamUtils;
 use app\forms\LoginForm;
@@ -17,17 +20,19 @@ class DbEdit {
   
     private $where;
     private $form;
+    
     private $user_id;
 
 	public function __construct(){
 		//stworzenie potrzebnych obiektów
 		$this->form = new BookBorrowForm();
                 
+                
 	}
     
     public function getWhere(){
         $this->form->book_id = ParamUtils::getFromRequest('book_id');
-        $this->form->user_id = 1;
+        $this->form->user_id = SessionUtils::load("userid",$keep = true);
         //$this->form->user_id = ParamUtils::getFromSession('user_id');
                  $search_params = []; //przygotowanie pustej struktury (aby była dostępna nawet gdy nie będzie zawierała wierszy)
 		if (( isset($this->form->book_id) && strlen($this->form->book_id) > 0)){
@@ -45,6 +50,8 @@ class DbEdit {
     }
 
     public function action_borrow() {
+        if((SessionUtils::load("userid",$keep = true))!=null){    
+        
 	$this->getWhere();
         
         try{
@@ -52,20 +59,48 @@ class DbEdit {
                 "id_user"=>$this->form->user_id
                 
             ], $this->where);
-                    App::getMessages()->addMessage(new \core\Message($this->where, \core\Message::ERROR));
+                    App::getMessages()->addMessage(new Message($this->where, Message::ERROR));
                     
                    
 		} catch (PDOException $e){
-                    App::getMessages()->addMessage(new \core\Message("Wystąpił błąd podczas pobierania rekordów", \core\Message::ERROR));
+                    App::getMessages()->addMessage(new Message("Wystąpił błąd podczas pobierania rekordów", Message::ERROR));
                     if (getConf()->debug) {
-                    App::getMessages()->addMessage(new \core\Message($e, \core\Message::ERROR));
+                    App::getMessages()->addMessage(new Message($e, Message::ERROR));
                 }
+            }
+
+
+
+            App::getRouter()->forwardTo('view');
+
         }
-               
+    }
+    
+    public function action_return() {
+        if(RoleUtils::inRole("Admin")){    
         
-       
-        App::getRouter()->forwardTo('view');
+	$this->getWhere();
         
+        try{
+            App::getDB()->update('books', [
+                "id_user"=>null
+                
+            ], $this->where);
+                    App::getMessages()->addMessage(new Message($this->where, Message::ERROR));
+                    
+                   
+		} catch (PDOException $e){
+                    App::getMessages()->addMessage(new Message("Wystąpił błąd podczas pobierania rekordów", Message::ERROR));
+                    if (getConf()->debug) {
+                    App::getMessages()->addMessage(new Message($e, Message::ERROR));
+                }
+            }
+
+
+
+            App::getRouter()->forwardTo('view');
+
+        }
     }
     
 }

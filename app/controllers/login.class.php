@@ -1,13 +1,15 @@
 <?php
 
 namespace app\controllers;
-
+use core\SessionUtils;
 use core\App;
 use core\Utils;
 use core\RoleUtils;
 use core\ParamUtils;
 use app\forms\LoginForm;
 use core\Validator;
+use core\Message;
+use core\Messages;
 
 class login {
 
@@ -26,8 +28,10 @@ class login {
     public function getWhere(){
                 $this->form->login = ParamUtils::getFromRequest('login');
                 $this->form->pass = ParamUtils::getFromRequest('password');
+                App::getSmarty()->assign("flastname","");
+                App::getSmarty()->assign("ftitle","");
                 App::getSmarty()->assign("login", $this->form->login);        
-
+                App::getSmarty()->assign("books","");      
         
         
                  $search_params = []; //przygotowanie pustej struktury (aby była dostępna nawet gdy nie będzie zawierała wierszy)
@@ -66,31 +70,53 @@ class login {
                     
                    
 		} catch (PDOException $e){
-                    App::getMessages()->addMessage(new \core\Message("Wystąpił błąd podczas pobierania rekordów", \core\Message::ERROR));
+                    App::getMessages()->addMessage(new Message("Wystąpił błąd podczas pobierania rekordów", Message::ERROR));
                     if (getConf()->debug) {
-                    App::getMessages()->addMessage(new \core\Message($e, \core\Message::ERROR));
+                    App::getMessages()->addMessage(new Message($e, Message::ERROR));
                 }
         }
         if(empty($this->loginfo)){
-                    App::getMessages()->addMessage(new \core\Message("Incorrect Credentials", \core\Message::ERROR));  
+                    App::getMessages()->addMessage(new Message("Incorrect Credentials", Message::ERROR));  
         }else{
             foreach($this->loginfo as $item) {
                 RoleUtils::addRole($item["rnazwa"]);
+                SessionUtils::store("userid", $item["id_user"]);
+                App::getSmarty()->assign("ufname",$item["uimie"]);
+                App::getSmarty()->assign("ulname",$item["unazwisko"]);
             }
         } 
-        if(RoleUtils::inRole("Admin"))
-            {echo "IN ADMIN";}
+        
+        
+        
+       /* if(RoleUtils::inRole("Admin")){
+            App::getSmarty()->display("admin_view.tpl");
         }
-        else{
-            App::getMessages()->addMessage(new \core\Message("Please input both your login and password", \core\Message::ERROR));
+        else 
+            if(RoleUtils::inRole("User")){
+                App::getSmarty()->display("logged_view.tpl");
+            }
+            else{
+                App::getSmarty()->display("main_view.tpl");
+            }
+        */
         }
-        App::getSmarty()->display("test.tpl");
+        \core\App::getRouter()->forwardTo("view");
     }
     
-    public function sessionStarter(){
-        
-        
+    public function action_dologout() {        
+        if(RoleUtils::inRole("User")){
+            RoleUtils::removeRole("User");
+        }
+        if(RoleUtils::inRole("Admin")){
+            RoleUtils::removeRole("Admin");
+        }
+        SessionUtils::remove("userid");
+        App::getSmarty()->clearAllAssign();
+        App::getRouter()->redirectTo("view");
+
     }
+    
+    
     
 }
     
