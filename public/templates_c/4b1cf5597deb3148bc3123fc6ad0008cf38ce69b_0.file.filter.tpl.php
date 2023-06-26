@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 4.3.0, created on 2023-06-23 02:35:30
+/* Smarty version 4.3.0, created on 2023-06-26 21:02:51
   from 'B:\www\Projekt\app\views\templates\filter.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.3.0',
-  'unifunc' => 'content_6494e8d2160e34_50948051',
+  'unifunc' => 'content_6499e0db1e6f62_30323353',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_6494e8d2160e34_50948051 (Smarty_Internal_Template $_smarty_tpl) {
+function content_6499e0db1e6f62_30323353 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <form class="pure-form pure-form-stacked" action="<?php echo $_smarty_tpl->tpl_vars['conf']->value->action_root;?>
 view" method="post">

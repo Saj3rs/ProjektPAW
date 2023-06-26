@@ -11,5 +11,5 @@ Utils::addRoute('dologout','login');
 Utils::addRoute('view', 'DbView');
 Utils::addRoute('borrow', 'DbEdit',['User','Admin']);
 Utils::addRoute('return', 'DbEdit',['Admin']);
-Utils::addRoute('modify', 'DbEdit',['Admin']);
+Utils::addRoute('adduser', 'DbInsert',['Admin']);
 //Utils::addRoute('action_name', 'controller_class_name');

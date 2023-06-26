@@ -79,7 +79,7 @@ class DbView {
                 }
         }
                
-        
+        App::getSmarty()->assign("mess", App::getMessages()->getMessages());      
         App::getSmarty()->assign("books", $this->records);      
         
         if(RoleUtils::inRole("Admin")){

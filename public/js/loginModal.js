@@ -3,7 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-var modal  = document.getElementById("loginModal");
+var modal  = document.getElementById("modal");
+var logout = document.getElementById("logoutButton");
 var button = document.getElementById("modButton");
 var close  = document.getElementById("modClose");
 
@@ -12,5 +13,8 @@ button.onclick = function(){
 };
 close.onclick = function(){
     modal.removeAttribute("open");
+};
+logout.onclick = function(){
+    document.logoutForm.submit();
 };
 

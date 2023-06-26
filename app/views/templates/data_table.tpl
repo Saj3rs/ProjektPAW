@@ -20,7 +20,7 @@
 {strip}
 	<tr>
                 
-		<td>{$p["id_book"]}</td>
+		<td style="padding-bottom: 1%  ">{$p["id_book"]}</td>
 		<td>{$p["tytul"]}</td>
 		<td>{$p["gatunek"]}</td>
 		<td>{$p["aimie"]}</td>

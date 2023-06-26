@@ -6,7 +6,7 @@
 
     <div id="menu">
         <div class="pure-menu">
-            <a href="#Intro" class="pure-menu-heading">Introduction</a>
+            <a href="#Intro" >Introduction</a>
 
             <ul class="pure-menu-list">
                <!-- <li class="pure-menu-item"><a href="#Calc" class="pure-menu-link">Calculator</a></li>-->
