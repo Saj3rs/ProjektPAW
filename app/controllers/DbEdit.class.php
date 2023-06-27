@@ -31,55 +31,57 @@ class DbEdit {
 	}
     
     public function getWhere(){
-        $this->form->book_id = ParamUtils::getFromRequest('book_id');
-        $this->form->user_id = SessionUtils::load("userid",$keep = true);
-        //$this->form->user_id = ParamUtils::getFromSession('user_id');
-                 $search_params = []; //przygotowanie pustej struktury (aby była dostępna nawet gdy nie będzie zawierała wierszy)
-		if (( isset($this->form->book_id) && strlen($this->form->book_id) > 0)){
-			$search_params['id_book'] = $this->form->book_id; // dodanie symbolu % zastępuje dowolny ciąg znaków na końcu
-			//$search_params['id_user'] = NULL; // dodanie symbolu % zastępuje dowolny ciąg znaków na końcu
-		
-                        
-                }
-		$num_params = sizeof($search_params);
-		if ($num_params > 1) {
-			$this->where = [ "AND" => &$search_params ];
-		} else {
-			$this->where = &$search_params;
-		}
+        
+        
+            $search_params = []; //przygotowanie pustej struktury (aby była dostępna nawet gdy nie będzie zawierała wierszy)
+            if (( isset($this->form->book_id) && strlen($this->form->book_id) > 0)){
+                $search_params['id_book'] = $this->form->book_id; // dodanie symbolu % zastępuje dowolny ciąg znaków na końcu
+		//$search_params['id_user'] = NULL; // dodanie symbolu % zastępuje dowolny ciąg znaków na końcu  
+            }
+            $num_params = sizeof($search_params);
+            if ($num_params > 1) {
+		$this->where = [ "AND" => &$search_params ];
+            } else {
+		$this->where = &$search_params;
+            }
+        
     }
 
     public function action_borrow() {
         if((SessionUtils::load("userid",$keep = true))!=null){    
-        
-	$this->getWhere();
-        
-        try{
-            App::getDB()->update('books', [
-                "id_user"=>$this->form->user_id
+            $this->form->book_id = ParamUtils::getFromRequest('book_id');
+            $this->form->user_id = SessionUtils::load("userid",$keep = true);
+            $this->form->borrowed = ParamUtils::getFromRequest('borrowed');
+            if(RoleUtils::inRole("Admin")==true || $this->form->borrowed==null){
+                $this->getWhere();
                 
-            ], $this->where);
-                    App::getMessages()->addMessage(new Message($this->where, Message::ERROR));
-                    
-                   
-		} catch (PDOException $e){
-                    App::getMessages()->addMessage(new Message("Wystąpił błąd podczas pobierania rekordów", Message::ERROR));
-                    if (getConf()->debug) {
-                    App::getMessages()->addMessage(new Message($e, Message::ERROR));
-                }
+                try{
+                    App::getDB()->update('books', [
+                        "id_user"=>$this->form->user_id
+
+                    ], $this->where);
+                            App::getMessages()->addMessage(new Message($this->where, Message::ERROR));
+
+
+                        } catch (PDOException $e){
+                            App::getMessages()->addMessage(new Message("Wystąpił błąd podczas pobierania rekordów", Message::ERROR));
+                            if (getConf()->debug) {
+                            App::getMessages()->addMessage(new Message($e, Message::ERROR));
+                        }
+                    }
+
+
             }
-
-
-
             App::getRouter()->forwardTo('view');
-
+            
         }
     }
     
     public function action_return() {
         if(RoleUtils::inRole("Admin")){    
-        
-	$this->getWhere();
+            $this->form->book_id = ParamUtils::getFromRequest('book_id');
+            $this->form->user_id = SessionUtils::load("userid",$keep = true);
+            $this->getWhere();
         
         try{
             App::getDB()->update('books', [
