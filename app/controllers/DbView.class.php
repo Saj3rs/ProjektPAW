@@ -52,9 +52,8 @@ class DbView {
 		}
 		$where ["ORDER"] = "books.tytul";
     }
-
-    public function action_view() {
-	$this->getWhere();
+    public function getRecords() {
+        $this->getWhere();
         
         try{
              $this->records = App::getDB()->select('books', [
@@ -80,7 +79,17 @@ class DbView {
         }
                
         App::getSmarty()->assign("mess", App::getMessages()->getMessages());      
-        App::getSmarty()->assign("books", $this->records);      
+        App::getSmarty()->assign("books", $this->records);  
+        
+    }
+    public function action_reloadTable() {
+        $this->getRecords();
+        App::getSmarty()->display("data_table.tpl");
+    }
+
+
+    public function action_view() {
+        $this->getRecords();
         
         if(RoleUtils::inRole("Admin")){
             App::getSmarty()->display("admin_view.tpl");

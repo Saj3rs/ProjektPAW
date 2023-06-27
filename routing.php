@@ -12,4 +12,5 @@ Utils::addRoute('view', 'DbView');
 Utils::addRoute('borrow', 'DbEdit',['User','Admin']);
 Utils::addRoute('return', 'DbEdit',['Admin']);
 Utils::addRoute('adduser', 'DbInsert',['Admin']);
+Utils::addRoute('reloadTable', 'DbView');
 //Utils::addRoute('action_name', 'controller_class_name');

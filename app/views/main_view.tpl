@@ -33,13 +33,15 @@
     
 {include file="./templates/filter.tpl"}
 </div>
-{include file="./templates/data_table.tpl"}
-    </main>
-
-
+<div id="results">
+    {include file="./templates/data_table.tpl"}
+    
+</div>
+</main>
 
 </div>
 <script src="http://localhost:8080/Projekt/public/js/loginModal.js"></script>
+<script src="http://localhost:8080/Projekt/public/js/functions.js"></script>
 
 </body>
 </html>
