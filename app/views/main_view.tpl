@@ -30,17 +30,13 @@
         {/block}
     </header>
 <main style="clear:both">
-{if $msgs->isError()}
+{if $msgs->isMessage("lerror")}
   <article>
       <head ><h3><kbd>ERROR:</kbd></h3></head>
       <footer>
-          <ul>
-  {foreach $msgs->getMessages() as $msg}
-    
-      <li><h4>{$msg->text}</h4></li>
-    
-  {/foreach}
-          </ul>
+        
+      <h5>{$msgs->getMessage("lerror")->text}</h5>
+          
       </footer>
   </article>
 {/if}

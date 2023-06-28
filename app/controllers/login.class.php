@@ -77,7 +77,7 @@ class login {
         }
         if(empty($this->loginfo)){
                     
-                    App::getMessages()->addMessage(new Message("Incorrect Credentials", Message::ERROR)); 
+                    App::getMessages()->addMessage(new Message("Inserted Incorrect Credentials", Message::ERROR),"lerror"); 
                     
         }else{
             foreach($this->loginfo as $item) {
@@ -102,7 +102,7 @@ class login {
                 App::getSmarty()->display("main_view.tpl");
             }
         */
-        }else{App::getMessages()->addMessage(new Message("Empty Credentials", Message::ERROR)); }
+        }else{App::getMessages()->addMessage(new Message("Inserted Empty Credentials", Message::ERROR),"lerror"); }
         App::getRouter()->forwardTo("view");
     }
     
