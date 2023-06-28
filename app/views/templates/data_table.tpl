@@ -33,7 +33,7 @@
 		<td>{$p["unazwisko"]}</td>
                 {if Core\RoleUtils::inRole("User")}
                 <td style="padding: 0px;margin-bottom: 0px">
-                    <form id="borrowform" style="padding: 0px;margin-bottom: 0px" action="{$conf->action_root}borrow" >
+                    <form id="borrowform" style="padding: 0px;margin-bottom: 0px" action="{url action='borrow'}" >
                         <input id="book_id" type="hidden" name="book_id" value="{$p["id_book"]}" /><br />
                         <input id="book_id" type="hidden" name="borrowed" value="{$p["unazwisko"]}" /><br />
                         {if $p["uimie"]==null}
@@ -45,13 +45,13 @@
                 </td>
                 {else if Core\RoleUtils::inRole("Admin")}
                 <td style="padding: 0px;margin-bottom: 0px">
-                    <form id="borrowform" style="padding: 0px;margin-bottom: 0px" action="{$conf->action_root}borrow" method="post" >
+                    <form id="borrowform" style="padding: 0px;margin-bottom: 0px" action="{url action='borrow'}" method="post" >
                         <input id="book_id" type="hidden" name="book_id" value="{$p["id_book"]}" /><br />
                         <input style="height:auto;width:auto;padding: 10px;"role="button" type="submit" value="Borrow" />
                     </form>
                 </td>
                  <td style="padding:0px;margin-bottom: 0px">
-                    <form id="borrowform" style="padding: 0px ;margin-bottom: 0px" action="{$conf->action_root}return" method="post">
+                    <form id="borrowform" style="padding: 0px ;margin-bottom: 0px" action="{url action='return'}" method="post">
                         <input id="book_id" type="hidden" name="book_id" value="{$p["id_book"]}" /><br />
                         <input style="height:auto;width:auto;padding: 10px;" role="button" type="submit" value="Return" />
                     </form>
