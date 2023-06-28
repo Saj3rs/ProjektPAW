@@ -30,8 +30,8 @@
             
     </div>
             
-            <dialog style="width: 75%" id="modal">
-            <article>
+            <dialog  id="modal">
+            <article style="width: 75%">
               <header >
                 <button id="modClose" href="#close" aria-label="Close" class="close"></button>
                 <h3>Add a new user</h3>

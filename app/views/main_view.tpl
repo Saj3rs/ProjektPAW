@@ -19,7 +19,7 @@
         </div>
         
         <dialog id="modal">
-            <article>
+            <article style="width: 50%">
               <header >
                 <button id="modClose" href="#close" aria-label="Close" class="close"></button>
                 <h3>Login into your account</h3>

@@ -1,8 +1,8 @@
-<form class="pure-form pure-form-stacked" action="{url action='adduser'}" method="post">
+<form  action="{url action='adduser'}" method="post">
 	<label for="Login">Login: </label>
 	<input id="Login" type="text" name="login" /><br />
 	<label for="Password">Password: </label>
-	<input id="Password" type="text" name="password"  /><br />
+	<input id="Password" type="password" name="password"  /><br />
         <label for="Name">First name: </label>
 	<input id="Name" type="text" name="name"/><br />
 	<label for="Lname">Last name: </label>
