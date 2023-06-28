@@ -76,7 +76,9 @@ class login {
                 }
         }
         if(empty($this->loginfo)){
-                    App::getMessages()->addMessage(new Message("Incorrect Credentials", Message::ERROR));  
+                    
+                    App::getMessages()->addMessage(new Message("Incorrect Credentials", Message::ERROR)); 
+                    
         }else{
             foreach($this->loginfo as $item) {
                 RoleUtils::addRole($item["rnazwa"]);
@@ -85,8 +87,9 @@ class login {
                 App::getSmarty()->assign("ulname",$item["unazwisko"]);
             }
         } 
-        
-        
+                
+
+       
         
        /* if(RoleUtils::inRole("Admin")){
             App::getSmarty()->display("admin_view.tpl");
@@ -99,8 +102,8 @@ class login {
                 App::getSmarty()->display("main_view.tpl");
             }
         */
-        }
-        \core\App::getRouter()->forwardTo("view");
+        }else{App::getMessages()->addMessage(new Message("Empty Credentials", Message::ERROR)); }
+        App::getRouter()->forwardTo("view");
     }
     
     public function action_dologout() {        

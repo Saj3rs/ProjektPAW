@@ -30,6 +30,20 @@
         {/block}
     </header>
 <main style="clear:both">
+{if $msgs->isError()}
+  <article>
+      <head ><h3><kbd>ERROR:</kbd></h3></head>
+      <footer>
+          <ul>
+  {foreach $msgs->getMessages() as $msg}
+    
+      <li><h4>{$msg->text}</h4></li>
+    
+  {/foreach}
+          </ul>
+      </footer>
+  </article>
+{/if}
     
 {include file="./templates/filter.tpl"}
 </div>
