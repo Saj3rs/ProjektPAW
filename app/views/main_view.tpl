@@ -30,12 +30,12 @@
         {/block}
     </header>
 <main style="clear:both">
-{if $msgs->isMessage("lerror")}
+{if $msgs->isMessage("formerror")}
   <article>
       <head ><h3><kbd>ERROR:</kbd></h3></head>
       <footer>
         
-      <h5>{$msgs->getMessage("lerror")->text}</h5>
+      <h5>{$msgs->getMessage("formerror")->text}</h5>
           
       </footer>
   </article>
