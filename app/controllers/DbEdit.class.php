@@ -64,7 +64,7 @@ class DbEdit {
 
 
                         } catch (PDOException $e){
-                            App::getMessages()->addMessage(new Message("Wystąpił błąd podczas pobierania rekordów", Message::ERROR));
+                            App::getMessages()->addMessage(new Message("Database Error - Borrow", Message::ERROR));
                             if (getConf()->debug) {
                             App::getMessages()->addMessage(new Message($e, Message::ERROR));
                         }
@@ -92,7 +92,7 @@ class DbEdit {
                     
                    
 		} catch (PDOException $e){
-                    App::getMessages()->addMessage(new Message("Wystąpił błąd podczas pobierania rekordów", Message::ERROR));
+                    App::getMessages()->addMessage(new Message("Database Error - Return", Message::ERROR));
                     if (getConf()->debug) {
                     App::getMessages()->addMessage(new Message($e, Message::ERROR));
                 }
